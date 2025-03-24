@@ -1,23 +1,40 @@
 public class Main {
 
     public static void main(String[] args) {
-        CCuenta miCuenta;
-        double saldoActual;
+        CCuenta cuenta1;
 
-        miCuenta = new CCuenta("Antonio López","1000-2365-85-1230456789",2500,0);
-        saldoActual = miCuenta.estado();
-        System.out.println("El saldo actual es"+ saldoActual );
+        cuenta1 = new CCuenta("Antonio López","1000-2365-85-1230456789",2500,0);
+        ingresarEnCuenta(cuenta1,2300);
+        operativa_cuenta(cuenta1,695);
+        System.out.println("El saldo actual es "+ cuenta1.getSaldo() );
 
-        try {
-            miCuenta.retirar(2300);
-        } catch (Exception e) {
-            System.out.print("Fallo al retirar");
+    }
+
+    /**
+     * Realiza las operaciones de ingreso y retiro en la cuenta.
+     *
+     * @param cuenta La cuenta con la que se va a operar.
+     * @param cantidad La cantidad a retirar e ingresar.
+     */
+
+    public static void ingresarEnCuenta(CCuenta cuenta, double cantidad){
+        try{
+            cuenta.ingresar(cantidad);
+            System.out.println("Se ha ingresado "+ cantidad+ " en la cuenta");
+        }catch (Exception e){
+            System.out.println("No se ha podido ingresar la cantidad"+ e.getMessage());
         }
-        try {
-            System.out.println("Ingreso en cuenta");
-            miCuenta.ingresar(695);
-        } catch (Exception e) {
-            System.out.print("Fallo al ingresar");
+
+    }
+
+    public static void operativa_cuenta(CCuenta cuenta, double cantidad){
+        try{
+            cuenta.retirar(cantidad);
+            System.out.println("Se ha retirado correctamente "+ cantidad + " de la cuenta");
+        }catch (Exception e){
+            System.out.println("Fallo al retirar "+ e.getMessage());
         }
+
+
     }
 }
